@@ -180,7 +180,7 @@ document.addEventListener("DOMContentLoaded", inicio, false);
 function inicio() {
     var nuevaImagen = new Image();
     setNotificacion('success',"Se procede a la carga en memoria de la imagen");    
-    nuevaImagen = cargarImagen("https://www.wordstream.com/wp-content/uploads/2021/07/banner-ads-examples-ncino.jpg");
+    nuevaImagen = cargarImagen("https://i.ibb.co/jZKvFGS/banner.png");
 }
 function cargarImagen(url) {
     var imagen = new Image();
