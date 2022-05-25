@@ -9,16 +9,16 @@ function validarProducto(producto) {
 
         //console.log(producto);
 
-        if(txtId.value.length > 0){
+        if (txtId.value.length > 0) {
             actualizarProducto(txtId.value);
             setNotificacion('success', "Producto actualizado correctamente");
             resetearCampos();
-        }else{
+        } else {
             agregarAlStock(producto)
             setNotificacion('success', "Producto ingresado correctamente");
             resetearCampos();
-        } 
-        
+        }
+
 
     } else {
         setNotificacion('danger', "Debe ingresar todos los datos del producto!");
@@ -45,7 +45,7 @@ function setNotificacion(type, msg) {
 
 function crearProducto(cod, nombre, color, precio, cantidad) {
     producto = new Producto(cod, nombre, color, precio, cantidad);
-    validarProducto(producto);    
+    validarProducto(producto);
 
     return producto;
 }
@@ -77,7 +77,7 @@ function mostrarStock() {
           </div>
             `
         }
-    }else{
+    } else {
         var productoDiv = document.getElementById("producto")
         productoDiv.innerHTML = `
             <div class="text-center">
@@ -96,13 +96,13 @@ function agregarAlStock(producto) {
     mostrarStock();
 }
 
-function actualizarProducto(id){
+function actualizarProducto(id) {
 
     var productoEncontrado = {};
 
-    for (producto of stock){
-        if(producto.id == id){
-            productoEncontrado = producto            
+    for (producto of stock) {
+        if (producto.id == id) {
+            productoEncontrado = producto
         }
     }
     productoEncontrado.codigoProducto = txtCod.value;
@@ -112,10 +112,10 @@ function actualizarProducto(id){
     productoEncontrado.cantidad = txtCantidad.value;
     //console.log(productoEncontrado);
     ocultarBtnEliminar();
-    mostrarStock();    
+    mostrarStock();
 }
 
-function eliminarProducto(productoEntryID){
+function eliminarProducto(productoEntryID) {
 
     var newStock = stock.filter(producto => producto.id != productoEntryID);
     stock = newStock;
@@ -123,55 +123,76 @@ function eliminarProducto(productoEntryID){
     resetearCampos();
     ocultarBtnEliminar();
     mostrarStock();
-    
+
 }
 
-function setBtnEliminar(){
+function setBtnEliminar() {
     var btnEliminar = document.getElementById("btnEliminar");
-    btnEliminar.innerHTML=`
+    btnEliminar.innerHTML = `
     
         <button class="btn btn-danger rounded-circle px-3" onclick="eliminarProducto(txtId.value)"><i class="fa-solid fa-trash"></i></button>
      `
 }
-function ocultarBtnEliminar(){
+function ocultarBtnEliminar() {
     var btnEliminar = document.getElementById("btnEliminar");
-    btnEliminar.innerHTML=``
+    btnEliminar.innerHTML = ``
 }
 
-function setCampos(producto){
+function setCampos(producto) {
     txtId.value = producto.id;
-    txtCod.value=producto.codigoProducto;
-    txtNombre.value=producto.nombre;
-    txtColor.value=producto.color;
-    txtPrecio.value=producto.precio;
-    txtCantidad.value=producto.cantidad;
+    txtCod.value = producto.codigoProducto;
+    txtNombre.value = producto.nombre;
+    txtColor.value = producto.color;
+    txtPrecio.value = producto.precio;
+    txtCantidad.value = producto.cantidad;
     setBtnEliminar();
-    }
-
-
-function resetearCampos(){
-    txtId.value = "";
-    txtCod.value=''
-    txtNombre.value=''
-    txtColor.value=''
-    txtPrecio.value=''
-    txtCantidad.value=''
-    
 }
 
-function mostrarCantidadProductos(){
+
+function resetearCampos() {
+    txtId.value = "";
+    txtCod.value = ''
+    txtNombre.value = ''
+    txtColor.value = ''
+    txtPrecio.value = ''
+    txtCantidad.value = ''
+
+}
+
+function mostrarCantidadProductos() {
     var cantidad = stock.length;
     var msgDiv = document.getElementById("msg")
     msgDiv.innerHTML = `
         <div class="text-center">
-            <div class="alert alert-info rounded-pill"> Hay <b>${cantidad}</b> producto${cantidad==1?'':'s'} en stock.</div>
+            <div class="alert alert-info rounded-pill"> Hay <b>${cantidad}</b> producto${cantidad == 1 ? '' : 's'} en stock.</div>
         </div>
     `;
     setTimeout(function () {
         msgDiv.classList.remove('alert');
-        msgDiv.classList.remove('alert-dark');       
+        msgDiv.classList.remove('alert-dark');
         msgDiv.innerHTML = ``;
     }, 3500);
+}
+
+//cargar imagen
+
+document.addEventListener("DOMContentLoaded", inicio, false);
+function inicio() {
+    var nuevaImagen = new Image();
+    setNotificacion('success',"Se procede a la carga en memoria de la imagen");    
+    nuevaImagen = cargarImagen("https://www.wordstream.com/wp-content/uploads/2021/07/banner-ads-examples-ncino.jpg");
+}
+function cargarImagen(url) {
+    var imagen = new Image();
+    imagen.onload = imagenCargada;
+    imagen.src = url;
+    console.log(imagen);
+    var imgLabel= document.getElementById("imagen");
+    imgLabel.src= imagen.src;
+    return imagen;
+}
+function imagenCargada() {
+    setNotificacion('success',"La imagen se ha cargado correctamente");
 }
 
 

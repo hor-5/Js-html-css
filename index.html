@@ -99,6 +99,8 @@
                 </div>
             </div>
         </div>
+        
+
         <div id="msg"></div>
         
 
@@ -109,8 +111,17 @@
         </div>
 
 
+        <div class="row mt-2">
+            <h3>Imagen Banner</h3>
+        </div>
+        <div class="row">
+            <input type="text" placeholder="Ingrese la url de la imagen" name="imgUrl" id="imgUrl" class="form-control">
+            <button class="btn btn-flat btn-warning mt-1" onclick="cargarImagen(imgUrl.value)">modificar</button>
+        </div>
 
-
+        <div class="row d-flex justify-content-center">
+            <img class="img m-2" id="imagen" width="100px" height="200px">            
+        </div>
 
 
 
